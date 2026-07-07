@@ -2,9 +2,21 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project status
+## Commands
 
-This repository is currently empty (no source files yet). Update this file as the codebase takes shape — add real build/lint/test commands and architecture notes once they exist.
+- `npm install` — install dependencies
+- `npm run dev` — start the Vite dev server
+- `npm run build` — production build (outputs to `dist/`)
+- `npm run lint` — run ESLint
+- `npm run preview` — preview the production build locally
+
+## Architecture
+
+Single-page React app scaffolded with Vite (`react` template, JavaScript, no router).
+
+- `src/main.jsx` — entry point, mounts `App` into `#root`.
+- `src/App.jsx` — the entire task board: `App` owns the `tasks` array in `useState` (each task is `{ id, text, completed }`, `id` via `crypto.randomUUID()`) and passes `toggleTask`/`deleteTask` callbacks down to the `TaskItem` component. There is no persistence layer — state is in-memory only and resets on reload.
+- `src/App.css` / `src/index.css` — component styles and global/theme (light/dark via `prefers-color-scheme`) styles respectively.
 
 ## Git operation rules
 

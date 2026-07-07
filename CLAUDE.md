@@ -18,6 +18,14 @@ Single-page React app scaffolded with Vite (`react` template, JavaScript, no rou
 - `src/App.jsx` — the entire task board: `App` owns the `tasks` array in `useState` (each task is `{ id, text, completed }`, `id` via `crypto.randomUUID()`) and passes `toggleTask`/`deleteTask` callbacks down to the `TaskItem` component. Tasks persist to `localStorage` under the key `task-board.tasks` (loaded lazily on init, saved via a `useEffect` on every change).
 - `src/App.css` / `src/index.css` — component styles and global/theme (light/dark via `prefers-color-scheme`) styles respectively.
 
+## Deployment
+
+Deployed to GitHub Pages at `https://take61401891shoh.github.io/task-board/`.
+
+- `vite.config.js` sets `base: '/task-board/'` so built asset URLs resolve under the Pages subpath — keep this in sync if the repo is ever renamed.
+- `.github/workflows/deploy.yml` builds with `npm ci && npm run build` and publishes `dist/` via `actions/deploy-pages` on every push to `main`.
+- One-time setup (not done by this workflow): in the GitHub repo settings, set **Settings → Pages → Build and deployment → Source** to "GitHub Actions".
+
 ## Git operation rules
 
 - **Push every change to GitHub after committing.** Whenever code is modified and committed, immediately push the commit(s) to the corresponding GitHub remote branch (`git push`) so the remote stays in sync with local work. Do not leave committed changes unpushed.

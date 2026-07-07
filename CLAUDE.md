@@ -2,6 +2,26 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## デプロイ先
+
+https://take61401891shoh.github.io/task-board/
+
+## 技術スタック
+
+- React 19 + Vite 8(`react` テンプレート、JavaScript/JSX、TypeScriptなし)
+- ルーティングライブラリ・状態管理ライブラリなし(状態はすべて `App` の `useState`/`useEffect` に集約)
+- スタイリングはプレーンCSS(`src/App.css` / `src/index.css`)。CSSフレームワーク・CSS-in-JSは未使用
+- Lint: ESLint 10(`eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`)
+- デプロイ: GitHub Actions(`.github/workflows/deploy.yml`) → GitHub Pages
+
+## コンポーネントの命名規約
+
+- コンポーネント名は PascalCase(`App`, `TaskItem`)、`function ComponentName(props) { ... }` の関数宣言で定義する
+- 小さく関連の強いサブコンポーネント(例: `TaskItem`)は無理に別ファイルへ分割せず、親コンポーネントと同じファイル(`App.jsx`)に置く
+- props はシグネチャで分割代入する(例: `({ task, onToggle, onDelete })`)
+- イベントハンドラの props 名は `on` + 動詞(PascalCase)(`onToggle`, `onDelete`)。コンポーネント内のローカルなハンドラ関数は動詞始まりの camelCase(`addTask`, `toggleTask`, `deleteTask`)
+- CSSクラス名は kebab-case で、対象要素の役割を表す名前にする(`task-item`, `task-label`, `delete-button`)。状態を表すクラスは修飾子として要素名に付与する(例: `task-item completed`)
+
 ## Commands
 
 - `npm install` — install dependencies
